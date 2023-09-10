@@ -1,0 +1,106 @@
+<div class="text-center mx-5 rounded-4 " changedColor><h1>STUDENTS DETAILS</h1></div>
+
+
+<div class="container mt-5">
+  <table class="table bg-info table-hover mt-4 w-80 rounded-4
+  ">
+    <thead>
+      <tr class="bg-primary">
+        <th >id</th>
+        <th >name</th>
+        <th >age</th>
+        <th ></th>
+        <th ></th>
+        <th ></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>
+          <button
+          class="btn btn-success"
+            (click)="openOption(student.id); editStudent(student)"
+            *ngIf="!flag || selectedStudentId != student.id"
+          >
+            Edit
+          </button>
+          <div *ngIf="flag && selectedStudentId === student.id">
+            <button class="btn btn-danger" (click)="cancelEdit()">
+              Cancel
+            </button>
+            <button
+              class="btn btn-success"
+              (click)="SaveEditStudent(student.id)"
+            >
+              Save
+            </button>
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteStudent(student.id)">
+            Delete
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary"  (click)="showStudent(student)">
+            Show
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary mb-3 "> <a class="nav-link " [routerLink]="['/create_student']">ADD STUDENT</a>
+  </button>
+
+</div>
+<router-outlet> </router-outlet>
+
+<div class="text-center mx-5 rounded-4 " changedColor><h1>SLICE PIPE (Start With A LETTER)</h1></div>
+
+<table class="table bg-info table-hover mt-4 container mb-3 w-80 rounded-4">
+  <thead>
+    <tr class="bg-primary">
+      <th >id</th>
+      <th >name</th>
+      <th >age</th>
+      <th ></th>
+      <th ></th>
+      <th ></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students|sliceArray ">
+      <td >{{ student.id }}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.age }}</td>
+      <td>
+        <button
+        class="btn btn-success"
+          (click)="openOption(student.id); editStudent(student)"
+          *ngIf="!flag || selectedStudentId != student.id"
+        >
+          Edit
+        </button>
+        <div *ngIf="flag && selectedStudentId === student.id">
+          <button class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
+          <button  class="btn btn-success" (click)="SaveEditStudent(student.id)">
+            Save
+          </button>
+        </div>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteStudent(student.id)">
+          Delete
+        </button>
+      </td>
+      <td>
+        <button  class="btn btn-primary"  (click)="showStudent(student)">
+          Show
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
